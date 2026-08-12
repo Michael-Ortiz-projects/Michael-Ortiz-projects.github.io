@@ -1,60 +1,152 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Michael's Portfolio</title>
+  <title>Michael Ortiz | Electrical Engineering Portfolio</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
+
   <header>
     <h1>Michael Ortiz</h1>
-    <p>College developer</p>
+    <p>Electrical Engineering Student</p>
+
     <p class="bio">
-      I am an Electrical Engineering student with a passion for designing and building practical electronic systems.
-      My interests include analog and digital circuit design, RF electronics, embedded systems,
-      and hands-on engineering projects that strengthen both my technical knowledge and problem-solving abilities.
-      This portfolio showcases the projects, coursework, and technical skills I have developed throughout my education.
+      I am an Electrical Engineering student who enjoys designing and building
+      electronics. My interests include analog and digital circuit design,
+      RF electronics, and hands-on engineering projects that strengthen both
+      my technical knowledge and problem-solving skills.
     </p>
   </header>
 
+
   <section class="projects">
+
     <h2>Projects</h2>
 
+
+    <!-- AM Transmitter -->
+
     <div class="project">
-      <h3>Circuit Simulation Software </h3>
-      <p>
-        A tool written in C++ that simulates circuits using modified nodal analysis. 
-        It supports resistors, capacitors, inductors, and dynamic voltage and current sources. The simulation 
-        runs in real-time with graphical feedback and uses backwards-euler to approximate variables.
+
+      <h3>AM Transmitter</h3>
+
+      <p class="project-intro">
+        A discrete-component AM transmitter designed and built from scratch.
+        The transmitter generates an RF carrier, modulates it with an audio
+        signal, and produces a receivable AM signal.
       </p>
-      <div class="project-video">
-        <iframe 
-          width="100%" 
-          height="315" 
-          src="https://www.youtube.com/embed/A7cmmlkpdhg?start=4" 
-          title="Circuit Simulation Demo" 
-          frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" 
-          allowfullscreen>
-        </iframe>
+
+      <div class="project-images">
+        <img
+          src="images/am-transmitter.jpg"
+          alt="Completed AM transmitter built on a protoboard"
+        />
       </div>
+
+      <div class="project-details">
+
+        <div>
+          <h4>Project Details</h4>
+
+          <ul>
+            <li>Discrete transistor-based design</li>
+            <li>AM modulation</li>
+            <li>RF oscillator</li>
+            <li>RF amplification</li>
+            <li>Protoboard construction</li>
+            <li>Designed and built from scratch</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Skills Used</h4>
+
+          <ul>
+            <li>Analog circuit design</li>
+            <li>RF electronics</li>
+            <li>Transistor biasing</li>
+            <li>Oscillator design</li>
+            <li>Signal measurement</li>
+            <li>Circuit debugging</li>
+          </ul>
+        </div>
+
+      </div>
+
       <p>
-        <a href="https://github.com/Michael-Ortiz-projects/Circuit-Sim" target="_blank">
-          View Source Code on GitHub
+        I designed and constructed the transmitter in stages, testing the
+        oscillator, amplifier, and modulation circuitry before integrating
+        the complete system. The final circuit was soldered onto a protoboard
+        and successfully transmitted an audio signal using amplitude modulation.
+      </p>
+
+      <p>
+        <a href="am-transmitter.html">
+          View AM Transmitter Project →
         </a>
       </p>
+
     </div>
 
 
+    <!-- Circuit Simulation -->
+
+    <div class="project">
+
+      <h3>Circuit Simulation Software</h3>
+
+      <p>
+        A tool written in C++ that simulates circuits using modified nodal
+        analysis. It supports resistors, capacitors, inductors, and dynamic
+        voltage and current sources. The simulation runs in real-time with
+        graphical feedback and uses backward Euler to approximate circuit
+        variables.
+      </p>
+
+      <div class="project-video">
+
+        <iframe
+          width="100%"
+          height="315"
+          src="https://www.youtube.com/embed/A7cmmlkpdhg?start=4"
+          title="Circuit Simulation Demo"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+          allowfullscreen>
+        </iframe>
+
+      </div>
+
+      <p>
+        <a
+          href="https://github.com/Michael-Ortiz-projects/Circuit-Sim"
+          target="_blank"
+          rel="noopener noreferrer">
+          View Source Code on GitHub
+        </a>
+      </p>
+
+    </div>
+
   </section>
 
+
   <footer>
-    <p>© 2025 Michael · 
-      <a href="https://github.com/Michael-Ortiz-projects/Circuit-Sim" target="_blank">
-        Circuit Sim on GitHub
+    <p>
+      © 2026 Michael Ortiz ·
+      <a
+        href="https://github.com/Michael-Ortiz-projects"
+        target="_blank"
+        rel="noopener noreferrer">
+        GitHub
       </a>
     </p>
   </footer>
+
 </body>
 </html>
+```
