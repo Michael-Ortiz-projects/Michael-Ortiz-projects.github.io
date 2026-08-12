@@ -1,0 +1,202 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>AM Transmitter | Michael Ortiz</title>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+
+<body>
+
+  <header>
+
+    <h1>AM Transmitter</h1>
+
+    <p>
+      Discrete-component AM transmitter designed and built from scratch
+    </p>
+
+  </header>
+
+
+  <section class="projects">
+
+    <div class="project">
+
+      <h2>Overview</h2>
+
+      <p>
+        This project involved designing and building a functional amplitude
+        modulation transmitter using discrete electronic components.
+        The circuit was designed and tested in stages before being assembled
+        onto a protoboard.
+      </p>
+
+      <p>
+        The completed transmitter successfully generates an RF carrier,
+        modulates the carrier with an audio signal, and produces a signal
+        that can be received using an AM radio.
+      </p>
+
+
+      <h2>Design Goals</h2>
+
+      <ul>
+        <li>Design an AM transmitter from discrete components</li>
+        <li>Generate a stable RF carrier</li>
+        <li>Introduce an audio signal through amplitude modulation</li>
+        <li>Amplify the RF signal</li>
+        <li>Construct the final circuit on a protoboard</li>
+        <li>Verify operation using electronic test equipment</li>
+      </ul>
+
+
+      <h2>Block Diagram</h2>
+
+      <p>
+        The transmitter is divided into several functional stages:
+      </p>
+
+      <p>
+        <strong>
+          Audio Input → Modulation → RF Oscillator → RF Amplifier → Output
+        </strong>
+      </p>
+
+
+      <h2>Schematic</h2>
+
+      <div class="project-images">
+
+        <img
+          src="images/am-transmitter-schematic.png"
+          alt="Schematic of the AM transmitter"
+        />
+
+      </div>
+
+
+      <h2>RF Oscillator</h2>
+
+      <p>
+        The RF oscillator generates the carrier signal used for transmission.
+        The oscillator was designed around a target carrier frequency and
+        tested independently before being connected to the rest of the
+        transmitter.
+      </p>
+
+      <p>
+        The frequency is primarily determined by the reactive components
+        used in the oscillator. Component values were selected based on
+        the desired operating frequency and then verified experimentally.
+      </p>
+
+
+      <h2>RF Amplifier</h2>
+
+      <p>
+        The RF amplifier increases the amplitude of the carrier signal
+        before it is sent to the output. A buffer stage is used to reduce
+        loading on the oscillator and help maintain stable oscillation.
+      </p>
+
+
+      <h2>AM Modulation</h2>
+
+      <p>
+        The audio signal is introduced into the transmitter so that the
+        amplitude of the RF carrier varies with the audio waveform.
+        This produces the amplitude-modulated signal that can be recovered
+        by an AM receiver.
+      </p>
+
+
+      <h2>Construction</h2>
+
+      <div class="project-images">
+
+        <img
+          src="images/am-transmitter.jpg"
+          alt="Completed AM transmitter on a protoboard"
+        />
+
+      </div>
+
+      <p>
+        After testing the individual stages, the circuit was assembled
+        onto a protoboard. Care was taken to keep the RF circuitry
+        physically organized and to minimize unwanted coupling between
+        different stages.
+      </p>
+
+
+      <h2>Testing and Debugging</h2>
+
+      <p>
+        The circuit was tested incrementally rather than assembling the
+        entire transmitter at once. This made it possible to isolate
+        problems within individual stages.
+      </p>
+
+      <p>
+        One of the challenges encountered during development was preventing
+        the following amplifier stage from excessively loading the oscillator.
+        A buffer stage was used to electrically isolate the oscillator from
+        the rest of the transmitter.
+      </p>
+
+
+      <h2>Results</h2>
+
+      <p>
+        The completed transmitter successfully produced an AM signal and
+        transmitted an audio signal that could be received using an AM radio.
+        The final circuit was assembled entirely from discrete components
+        on a protoboard.
+      </p>
+
+
+      <h2>What I Learned</h2>
+
+      <p>
+        This project gave me practical experience with RF oscillators,
+        transistor amplifiers, impedance loading, amplitude modulation,
+        protoboard construction, and troubleshooting analog circuits.
+        It also demonstrated the difference between theoretical circuit
+        behavior and the behavior of a physical RF circuit.
+      </p>
+
+
+      <p>
+        <a href="index.html">← Back to Projects</a>
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <footer>
+
+    <p>
+      © 2026 Michael Ortiz ·
+      <a
+        href="https://github.com/Michael-Ortiz-projects"
+        target="_blank"
+        rel="noopener noreferrer">
+        GitHub
+      </a>
+    </p>
+
+  </footer>
+
+</body>
+
+</html>
+```
