@@ -30,10 +30,11 @@
 
       <h2>Overview</h2>
 
-      <p>
-        This project involved designing and building a functional amplitude
-        modulation transmitter using discrete electronic components.
-        The circuit was designed and tested in stages before being assembled
+      <p> I had previously made a crude version of an AM transmitter by using an 
+        arduino to handle the carrier generation as well as modulation, however I 
+        wanted to design and build one using discrete components. After many 
+        failed versions and through lots of testing, I made progress and eventually 
+        the circuit was designed and tested in stages before being assembled
         onto a protoboard.
       </p>
 
@@ -64,7 +65,7 @@
 
       <p>
         <strong>
-          Audio Input → Modulation → RF Oscillator → RF Amplifier → Output
+          RF Oscillator → Buffer → Amplifier & Modulator → Output
         </strong>
       </p>
 
@@ -74,7 +75,7 @@
       <div class="project-images">
 
         <img
-          src="images/am-transmitter-schematic.png"
+          src="images/RF_transmitter_schematic.png"
           alt="Schematic of the AM transmitter"
         />
 
@@ -85,32 +86,37 @@
 
       <p>
         The RF oscillator generates the carrier signal used for transmission.
-        The oscillator was designed around a target carrier frequency and
-        tested independently before being connected to the rest of the
-        transmitter.
+        The oscillator was designed around a specified carrier frequency 710 MHz and
+        tested independently before the rest of the transmitter was designed
       </p>
 
       <p>
-        The frequency is primarily determined by the reactive components
+        The frequency is primarily determined by the components
         used in the oscillator. Component values were selected based on
         the desired operating frequency and then verified experimentally.
       </p>
 
 
-      <h2>RF Amplifier</h2>
+      <h2>Buffer Stage</h2>
 
       <p>
-        The RF amplifier increases the amplitude of the carrier signal
-        before it is sent to the output. A buffer stage is used to reduce
-        loading on the oscillator and help maintain stable oscillation.
+        The buffer allows the carrier frequency to become usable.
+        Without a buffer stage, the rest of the transmitter would 
+        load the oscillator, which would cause it to stop oscillating.
+        I chose the common collector amplifier configuration for this buffer
+        due to its high input impedance and low output impedance.
       </p>
 
 
-      <h2>AM Modulation</h2>
+      <h2> Amplification & AM Modulation</h2>
 
       <p>
-        The audio signal is introduced into the transmitter so that the
-        amplitude of the RF carrier varies with the audio waveform.
+        The RF amplifier increases the amplitude of the carrier signal
+        before it is sent to the output. In this stage I used a common 
+        emitter amplifier configuration because it can be used to amplify 
+        and modulate a signal in one step by shifting the bias point of the transistor.
+        An audio signal is then introduced into the transmitter so that
+        the amplitude of the RF carrier varies with the audio waveform.
         This produces the amplitude-modulated signal that can be recovered
         by an AM receiver.
       </p>
@@ -118,21 +124,32 @@
 
       <h2>Construction</h2>
 
+      <p>
+        After testing the individual stages on a breadboard and verified to work, I attached an antenna 
+        and was pleased to hear my signal being picked up by an AM radio. I then moved to put the circuit 
+        onto a board. I designed and put together a layout for a custom pcb.
+      </p>
+
+      <div class="project-images">
+        <img
+          src="images/RF_Transmitter_PCB_Layout.png"
+          alt="PCB layout"
+        />
+      </div>
+
+      <p>
+        I ended up going with a proto board because I already had them on hand and would be easy enough to solder and assemble
+      </p>
+
       <div class="project-images">
 
         <img
-          src="images/am-transmitter.jpg"
+          src="images/RF_Transmitter_PCB_2.jpg"
           alt="Completed AM transmitter on a protoboard"
         />
 
       </div>
 
-      <p>
-        After testing the individual stages, the circuit was assembled
-        onto a protoboard. Care was taken to keep the RF circuitry
-        physically organized and to minimize unwanted coupling between
-        different stages.
-      </p>
 
 
       <h2>Testing and Debugging</h2>
@@ -144,10 +161,10 @@
       </p>
 
       <p>
-        One of the challenges encountered during development was preventing
+        One of the challenges encountered during development, which turned 
+        out to be an excellent learning opportunity, was preventing
         the following amplifier stage from excessively loading the oscillator.
-        A buffer stage was used to electrically isolate the oscillator from
-        the rest of the transmitter.
+        After much testing and researching I diagnosed the issue being bad impedance matching.
       </p>
 
 
@@ -164,8 +181,8 @@
       <h2>What I Learned</h2>
 
       <p>
-        This project gave me practical experience with RF oscillators,
-        transistor amplifiers, impedance loading, amplitude modulation,
+        This project gave me experience with RF oscillators,
+        transistor amplifiers, impedance loading, amplitude modulation,pcb and 
         protoboard construction, and troubleshooting analog circuits.
         It also demonstrated the difference between theoretical circuit
         behavior and the behavior of a physical RF circuit.
@@ -198,4 +215,3 @@
 </body>
 
 </html>
-```
