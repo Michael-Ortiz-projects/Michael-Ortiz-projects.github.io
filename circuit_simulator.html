@@ -1,0 +1,416 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Circuit Simulation Software | Michael Ortiz</title>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+
+<body>
+
+  <header>
+
+    <h1>Circuit Simulation Software</h1>
+
+    <p>
+      C++ circuit simulator using Modified Nodal Analysis and numerical simulation
+    </p>
+
+  </header>
+
+
+  <section class="projects">
+
+    <div class="project">
+
+
+      <!-- Overview -->
+
+      <h2>Overview</h2>
+
+      <p>
+        I developed a circuit simulation program in C++ designed to simulate
+        electrical circuits without relying on an existing circuit simulation
+        engine. The simulator uses Modified Nodal Analysis to mathematically
+        solve the circuit and numerical methods to simulate and record its behavior and values.
+      </p>
+
+      <p>
+        The project began as an attempt to better understand how circuit
+        simulation software works internally. Rather than treating a simulator
+        as a black box, I wanted to replicate the math and understand it on a deeper level.
+      </p>
+
+
+      <!-- Design Goals -->
+
+      <h2>Design Goals</h2>
+
+      <ul>
+        <li>Simulate electrical circuits using C++</li>
+        <li>Find a method to represent circuit components mathematically</li>
+        <li>Support multiple electrical component types</li>
+        <li>Simulate second order circuits</li>
+        <li>Provide a graphical representation of circuits</li>
+        <li>Display simulation results graphically</li>
+        <li>Build the simulation engine without relying on an existing SPICE engine</li>
+      </ul>
+
+
+      <!-- How It Works -->
+
+      <h2>How the Simulator Works</h2>
+
+      <p>
+        The simulator represents an electrical circuit as a mathematical system
+        of equations. The circuit is analyzed using Modified Nodal Analysis,
+        which allows the voltages and currents within the circuit to be solved
+        using a matrix-based system. Once the currents and voltages are solved for a given time step,
+        the results are then funneled back into the solver to update components 
+        that depend on changes in voltage or current for the next time step.
+      </p>
+
+      <!-- Modified Nodal Analysis -->
+
+      <h2>Modified Nodal Analysis</h2>
+
+      <p>
+        Modified Nodal Analysis (MNA) is used to convert the electrical circuit
+        into a system of equations that can be solved computationally.
+      </p>
+
+      <p>
+        Each component contributes (stamps) values to the system of equations based on
+        its electrical characteristics and the nodes to which it is connected.
+        In my simulator the system of equations represented by a matrix where 
+        rows and columns correspond to component currents or node voltages in the circuit.
+      </p>
+
+      <p>
+        For example, a resistor contributes a conductance to the matrix based on the formula:
+      </p>
+
+      <p>
+        <strong>
+          G = 1 / R
+        </strong>
+      </p>
+      <p>
+        The resistor stamp is implemented like this, where node i and j correspond 
+        to a row/column in the matrix. The matrix is updated to add or subtract G
+        according to this chart's columns. The simulator uses these relationships to construct the MNA matrix by 
+        stamping each component's values into it, which is then solved to
+        determine the unknown circuit voltages and
+        currents. Each component has its own stamp, however, this is the general idea behind stamping.
+      </p>
+
+      <div class="project-images">
+
+        <img
+          src="images/MNA_Resistor_stamp.png"
+          alt="resistor stamp"
+        />
+
+      </div>
+
+      
+
+
+      <!-- Transient Simulation -->
+
+      <h2>Transient Simulation</h2>
+
+      <p>
+        DC analysis alone is not enough for circuits containing components
+        whose behavior changes over time. The simulator has the ability to perform
+        transient analysis by repeatedly solving the circuit at discrete time
+        intervals.
+      </p>
+
+      <p>
+        Each simulation step uses the previous state of the circuit to determine
+        the values for the next time step. I used Backward Euler as the numerical integration method for
+        approximating the behavior of dynamic components like capacitors and inductors.
+      </p>
+      <p>
+        Backward Euler:
+      </p>
+
+      <!-- Add equations/graphs here -->
+      <div class="project-images">
+
+        <img
+          src="images/Backward_Euler.png"
+          style="width: 300px; height: auto; margin-left: auto; margin-right: auto;"
+          alt="Schematic of the AM transmitter"
+        />
+
+      </div>
+
+      <!-- Software Architecture -->
+
+      <h2>Software Architecture</h2>
+
+<p>
+  The simulator is divided into three main sections: the UI, controller,
+  and solver. Each section has a specific responsibility, allowing the
+  user interface, application logic, and circuit simulation to remain
+  separated from one another.
+</p>
+
+<ul>
+  <li>UI - Handles user interaction and visual circuit representation</li>
+  <li>Controller - Manages application logic and directs user requests</li>
+  <li>Solver - Builds and solves the mathematical representation of the circuit</li>
+</ul>
+
+
+<h3>User Interface</h3>
+
+<p>
+  The UI is responsible for interacting with the user and displaying the
+  current state of the circuit. User actions, such as placing a component,
+  moving a component, or starting a simulation, are converted into requests
+  for the controller to process.
+</p>
+
+
+<h3>Controller</h3>
+
+<p>
+  The controller acts as the central point between the UI and the rest of
+  the simulator. Instead of allowing the UI to directly modify the circuit
+  or communicate with the solver, user actions are represented as commands
+  that are passed to the controller.
+</p>
+
+<p>
+  The controller then determines what needs to be done and passes the request
+  to the appropriate handler. For example, when the user chooses to place a
+  new component, the UI generates a request indicating that a new component
+  needs to be placed. The controller receives this request and passes it to
+  the component placement handler, which is responsible for carrying out the
+  operation.
+</p>
+
+<p>
+  This separation prevents the UI from directly communicating with the
+  solver and keeps individual operations isolated from one another.
+</p>
+
+
+<h3>Solver</h3>
+
+<p>
+  The solver is responsible for the electrical simulation itself. It takes
+  the circuit represented by the application and converts it into the
+  mathematical system used for simulation. This includes constructing the
+  Modified Nodal Analysis matrix and solving for the circuit variables.
+</p>
+
+
+<h3>Request Flow</h3>
+
+<p>
+  A user action follows this general path:
+</p>
+
+<p>
+  <strong>
+    User → UI → Controller → Handler → Circuit
+  </strong>
+</p>
+
+<p>
+  For example, placing a new component begins with the user selecting the
+  component through the UI. The UI creates a request for a new component,
+  which is received by the controller. The controller then passes the
+  request to the component placement handler, which performs the necessary
+  operations to add the component to the circuit.
+</p>
+
+<p>
+  This architecture keeps the different parts of the simulator independent
+  and makes it easier to modify or add functionality without requiring the
+  UI and solver to directly depend on one another.
+</p>
+
+
+      <h2>Visualization</h2>
+
+      <p>
+        The simulator includes a graphical interface that allows circuit behaviors to
+        be represented visually as well as analyzed with a oscilloscope style cursors
+      </p>
+
+      <div class="project-images">
+
+        <img
+          src="images/Oscillating Circuit Oscilloscope.PNG"
+          style="width: 850px; height: auto; margin-left: auto; margin-right: auto;"          
+          alt="Oscilloscope"
+        />
+
+      </div>
+
+
+      <!-- Testing and Debugging -->
+
+      <h2>Testing and Debugging</h2>
+
+      <p>
+        The simulator was tested using simple circuits whose behavior could be
+        calculated independently. This allowed the simulation results to be
+        compared against theoretical values.
+      </p>
+
+      <p>
+        Example test circuits include:
+      </p>
+
+      <ul>
+        <li>Resistive voltage divider</li>
+        <li>RC charging circuit</li>
+        <li>RL circuit</li>
+        <li>RLC circuit</li>
+        <li>DC voltage source circuits</li>
+        <li>Time-varying source circuits</li>
+      </ul>
+
+      <p>
+        Testing individual circuits also helped identify problems in the matrix
+        construction, numerical solver, component models, and simulation
+        timestep.
+      </p>
+
+
+      <!-- Results -->
+
+      <h2>Results</h2>
+
+      <p>
+        The completed simulator is capable of constructing and solving
+        electrical circuits using the implemented numerical methods.
+      </p>
+
+      <p>
+        ADD DEMO VIDEO
+        <!-- Add specific results, screenshots, accuracy measurements,
+             supported components, and performance information here. -->
+      </p>
+
+
+      <!-- Problems and Improvements -->
+
+      <h2>Problems and Improvements</h2>
+
+      <p>
+        This version of the circuit simulator is actually a rewrite of the original.
+        My first attempt at the simulator was a success in a way,
+         but its architecture made it increasingly difficult to
+        add new features and component types. I rewrote the whole simulator
+        to improve its structure, maintainability, and ability to support additional simulation features.
+      </p>
+
+      <p>
+      One specific problem with the first version was that the simulation was
+      tied directly to real-world time. Because the simulation progressed as
+      the program was running, it was difficult to save simulation data or
+      reproduce an identical simulation later which made debugging and
+      verification of functionality a difficult task. Small differences in timing
+      could also affect the resulting data.
+      </p>
+
+      <p>
+        In the rewritten version, the simulation is separated from the user
+        interface and controlled using defined simulation time steps. This makes
+        the simulation more deterministic and allows simulation data to be
+        recorded, analyzed, and reproduced more reliably.
+      </p>
+
+
+      <!-- What I Learned -->
+
+      <h2>What I Learned</h2>
+
+      <p>
+        This project gave me practical experience with numerical methods,
+        circuit analysis, software architecture, and C++ programming.
+      </p>
+
+      <p>
+      The project showed me the importance of software architecture.
+      Separating the UI, controller, handlers, and solver made the simulator significantly
+      easier to modify and allowed new functionality to be added without
+      tightly coupling unrelated parts of the program.
+      </p>
+
+      <p>
+        Another major part of the project was debugging. Many problems could not
+        be solved simply by looking for a syntax error; I often had to
+        determine whether the problem came from the circuit equations, matrix
+        construction, node connection lists, solving methods, or the program itself. Comparing the
+        simulator's results against circuits with known solutions
+        became an important part of testing and debugging the program.
+      </p>
+
+      <p>
+        Overall, this project helped me develop a stronger understanding of the
+        relationship between electrical engineering and software development.
+        Building the simulator from the ground up allowed me to see how
+        circuit theory, linear algebra, and numerical analysis can be
+        combined to create a practical engineering tool.
+      </p>
+      <!-- Source Code -->
+
+      <h2>Source Code</h2>
+
+      <p>
+        The source code for the simulator is available on GitHub.
+      </p>
+
+      <p>
+        <a
+          href="https://github.com/Michael-Ortiz-projects/Circuit-Sim"
+          target="_blank"
+          rel="noopener noreferrer">
+          View Source Code on GitHub →
+        </a>
+      </p>
+
+
+      <!-- Back -->
+
+      <p>
+        <a href="index.html">← Back to Projects</a>
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <footer>
+
+    <p>
+      © 2026 Michael Ortiz ·
+      <a
+        href="https://github.com/Michael-Ortiz-projects"
+        target="_blank"
+        rel="noopener noreferrer">
+        GitHub
+      </a>
+    </p>
+
+  </footer>
+
+</body>
+
+</html>
+```
