@@ -40,9 +40,12 @@
       </p>
 
       <p>
-        The project began as an attempt to better understand how circuit
+        This project began as an attempt to better understand how circuit
         simulation software works internally. Rather than treating a simulator
         as a black box, I wanted to replicate the math and understand it on a deeper level.
+        It was especially exciting to learn and apply the method of analysis that computers use to analyze circuits.
+        Testing the simulator with multiple circuits and extracting accurate results was one of the most rewarding
+        parts of this project.
       </p>
 
 
@@ -291,13 +294,13 @@
       <p>
         This version of the circuit simulator is actually a rewrite of the original.
         My first attempt at the simulator was a success in a way,
-         but its architecture made it increasingly difficult to
+         however, its architecture made it increasingly difficult to
         add new features and component types. I rewrote the whole simulator
         to improve its structure, maintainability, and ability to support additional simulation features.
       </p>
 
       <p>
-      One specific problem with the first version was that the simulation was
+      One specific problem with the first version of the simulation was that the simulation was
       tied directly to real-world time. Because the simulation progressed as
       the program was running, it was difficult to save simulation data or
       reproduce an identical simulation later which made debugging and
@@ -322,23 +325,21 @@
 
       <p>
       The project showed me the importance of software architecture.
-      Separating the UI, controller, handlers, and solver made the simulator significantly
+      Separating the UI, controller, and solver made the simulator significantly
       easier to modify and allowed new functionality to be added without
       tightly coupling unrelated parts of the program.
       </p>
 
       <p>
-        Another major part of the project was debugging. Many problems could not
-        be solved simply by looking for a syntax error; I often had to
-        determine whether the problem came from the circuit equations, matrix
+        Another major part of the project was debugging because many problems could not
+        be solved by just looking for a syntax error. I often had to
+        determine whether the bug was coming from the circuit equations, matrix
         construction, node connection lists, solving methods, or the program itself. Comparing the
         simulator's results against circuits with known solutions
         became an important part of testing and debugging the program.
       </p>
 
       <p>
-        Overall, this project helped me develop a stronger understanding of the
-        relationship between electrical engineering and software development.
         Building the simulator from the ground up allowed me to see how
         circuit theory, linear algebra, and numerical analysis can be
         combined to create a practical engineering tool.
